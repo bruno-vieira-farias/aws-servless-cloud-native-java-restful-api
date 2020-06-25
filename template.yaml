@@ -32,25 +32,25 @@ Resources:
            Path: /trip
            Method: post
            
-#  GetStudyRecordsByPeriodFunction:
-#    Type: AWS::Serverless::Function
-#    Properties:
-#     CodeUri: target/study-datalake-1.0.0-SNAPSHOT-jar-with-dependencies.jar
-#     Handler: br.com.iwe.handler.GetStudyRecordsByPeriod::handleRequest
-#     Runtime: java8
-#     Policies:
-#       - DynamoDBCrudPolicy:
-#           TableName: !Ref StudyTable
-#     Events:
-#       GetStudyRecordsByPeriod:
-#         Type: Api
-#         Properties:
-#           Path: /study/{topic}/findByPeriod
-#           Method: get
-#           RequestParameters:
-#              - method.request.querystring.starts
-#              - method.request.querystring.ends
-#
+  GetTripRecordsByPeriodFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+     CodeUri: target/aws-servless-cloud-native-java-restful-api-1.0.0-SNAPSHOT-jar-with-dependencies.jar
+     Handler: br.com.fiap.handler.GetTripRecordsByPeriod::handleRequest
+     Runtime: java8
+     Policies:
+       - DynamoDBCrudPolicy:
+           TableName: !Ref TripTable
+     Events:
+       GetStudyRecordsByPeriod:
+         Type: Api
+         Properties:
+           Path: /trips
+           Method: get
+           RequestParameters:
+              - method.request.querystring.start
+              - method.request.querystring.end
+
 #  GetStudyRecordsByTagFunction:
 #    Type: AWS::Serverless::Function
 #    Properties:
@@ -122,10 +122,10 @@ Outputs:
       Description: "CreateTripRecord Lambda Function ARN"
       Value: !GetAtt CreateTripRecordFunction.Arn
       
-#    GetStudyRecordsByPeriodFunction:
-#      Description: "GetStudyRecordsByPeriod Lambda Function ARN"
-#      Value: !GetAtt GetStudyRecordsByPeriodFunction.Arn
-#
+    GetTripRecordsByPeriodFunction:
+      Description: "GetTripRecordsByPeriod Lambda Function ARN"
+      Value: !GetAtt GetTripRecordsByPeriodFunction.Arn
+
 #    GetStudyRecordsByTagFunction:
 #      Description: "GetStudyRecordsByTag Lambda Function ARN"
 #      Value: !GetAtt GetStudyRecordsByTagFunction.Arn

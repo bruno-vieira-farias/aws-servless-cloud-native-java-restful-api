@@ -31,25 +31,25 @@ Resources:
           Properties:
             Path: /trip
             Method: post
-#  GetStudyRecordsByPeriodFunction:
-#    Type: AWS::Serverless::Function
-#    Properties:
-#      CodeUri: s3://fiap-aws-servless-bruno-335369/706195ad05c27538b4a88f591ea36364
-#      Handler: br.com.iwe.handler.GetStudyRecordsByPeriod::handleRequest
-#      Runtime: java8
-#      Policies:
-#      - DynamoDBCrudPolicy:
-#          TableName:
-#            Ref: StudyTable
-#      Events:
-#        GetStudyRecordsByPeriod:
-#          Type: Api
-#          Properties:
-#            Path: /study/{topic}/findByPeriod
-#            Method: get
-#            RequestParameters:
-#            - method.request.querystring.starts
-#            - method.request.querystring.ends
+  GetTripRecordsByPeriodFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://fiap-aws-servless-bruno-335369/706195ad05c27538b4a88f591ea36364
+      Handler: br.com.iwe.handler.GetTripRecordsByPeriod::handleRequest
+      Runtime: java8
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: TripTable
+      Events:
+        GetStudyRecordsByPeriod:
+          Type: Api
+          Properties:
+            Path: /trips
+            Method: get
+            RequestParameters:
+            - method.request.querystring.start
+            - method.request.querystring.end
   # ----
 #  GetStudyRecordsByTagFunction:
 #    Type: AWS::Serverless::Function
@@ -123,12 +123,12 @@ Outputs:
       Fn::GetAtt:
       - CreateTripRecordFunction
       - Arn
-#  GetStudyRecordsByPeriodFunction:
-#    Description: GetStudyRecordsByPeriod Lambda Function ARN
-#    Value:
-#      Fn::GetAtt:
-#      - GetStudyRecordsByPeriodFunction
-#      - Arn
+  GetTripRecordsByPeriodFunction:
+    Description: GetTripRecordsByPeriod Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - GetTripRecordsByPeriodFunction
+      - Arn
 #  GetStudyRecordsByTagFunction:
 #    Description: GetStudyRecordsByTag Lambda Function ARN
 #    Value:

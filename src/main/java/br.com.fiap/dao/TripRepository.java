@@ -23,7 +23,6 @@ public class TripRepository {
         eav.put(":val1", new AttributeValue().withS(startDate));
         eav.put(":val2", new AttributeValue().withS(endDate));
 
-        // date is a reserved word in DynamoDB
         final Map<String, String> expression = new HashMap<>();
         expression.put("#date", "date");
 
@@ -35,7 +34,7 @@ public class TripRepository {
 
         return result;
     }
-    
+
     public List<Trip> findByCountry(final String country) {
 
         final Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
@@ -49,7 +48,6 @@ public class TripRepository {
         return result;
     }
 
-    //Country + City -> Query -> City contains
     public List<Trip> findByCity(final String country, final String city) {
 
         final Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
