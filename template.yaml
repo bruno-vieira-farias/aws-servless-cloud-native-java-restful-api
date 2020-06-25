@@ -1,0 +1,136 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'Aws Servless Cloud Native Java Restful Api
+
+  Trabalho para entrega da disciplina de AWS Servless.
+
+  '
+Globals:
+    Function:
+        Timeout: 20
+        MemorySize: 512
+        Environment:
+          Variables:
+            TABLE_NAME: !Ref TripTable
+            ENDPOINT_OVERRIDE: ""
+
+Resources:
+
+  CreateTripRecordFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+     CodeUri: target/aws-servless-cloud-native-java-restful-api-1.0.0-SNAPSHOT-jar-with-dependencies.jar
+     Handler: br.com.fiap.handler.CreateTripRecord::handleRequest
+     Runtime: java8
+     Policies:
+       - DynamoDBCrudPolicy:
+           TableName: !Ref TripTable
+     Events:
+       CreateTripRecord:
+         Type: Api
+         Properties:
+           Path: /trip
+           Method: post
+           
+#  GetStudyRecordsByPeriodFunction:
+#    Type: AWS::Serverless::Function
+#    Properties:
+#     CodeUri: target/study-datalake-1.0.0-SNAPSHOT-jar-with-dependencies.jar
+#     Handler: br.com.iwe.handler.GetStudyRecordsByPeriod::handleRequest
+#     Runtime: java8
+#     Policies:
+#       - DynamoDBCrudPolicy:
+#           TableName: !Ref StudyTable
+#     Events:
+#       GetStudyRecordsByPeriod:
+#         Type: Api
+#         Properties:
+#           Path: /study/{topic}/findByPeriod
+#           Method: get
+#           RequestParameters:
+#              - method.request.querystring.starts
+#              - method.request.querystring.ends
+#
+#  GetStudyRecordsByTagFunction:
+#    Type: AWS::Serverless::Function
+#    Properties:
+#     CodeUri: target/study-datalake-1.0.0-SNAPSHOT-jar-with-dependencies.jar
+#     Handler: br.com.iwe.handler.GetStudyRecordsByTag::handleRequest
+#     Runtime: java8
+#     Policies:
+#       - DynamoDBCrudPolicy:
+#           TableName: !Ref StudyTable
+#     Events:
+#       GetStudyRecordsByTag:
+#         Type: Api
+#         Properties:
+#           Path: /study/{topic}/findByTag
+#           Method: get
+#           RequestParameters:
+#              - method.request.querystring.tag
+#
+#  GetStudyRecordsByIsConsumedFunction:
+#    Type: AWS::Serverless::Function
+#    Properties:
+#     CodeUri: target/study-datalake-1.0.0-SNAPSHOT-jar-with-dependencies.jar
+#     Handler: br.com.iwe.handler.GetStudyRecordsByIsConsumed::handleRequest
+#     Runtime: java8
+#     Policies:
+#       - DynamoDBCrudPolicy:
+#           TableName: !Ref StudyTable
+#     Events:
+#       GetStudyRecordsByIsConsumed:
+#         Type: Api
+#         Properties:
+#           Path: /study/{topic}/findByIsConsumed
+#           Method: get
+#           RequestParameters:
+#              - method.request.querystring.isconsumed
+              
+  TripTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: trip
+      AttributeDefinitions:
+        - AttributeName: country
+          AttributeType: S
+        - AttributeName: date
+          AttributeType: S
+        - AttributeName: city
+          AttributeType: S
+        - AttributeName: reason
+          AttributeType: S
+      KeySchema:
+        - AttributeName: country
+          KeyType: HASH
+        - AttributeName: date
+          KeyType: RANGE
+      LocalSecondaryIndexes: 
+        - IndexName: cityIdx
+          KeySchema: 
+            - AttributeName: country
+              KeyType: HASH
+            - AttributeName: city
+              KeyType: RANGE
+          Projection:
+             ProjectionType: ALL
+      BillingMode: PAY_PER_REQUEST              
+
+Outputs:
+
+    CreateTripRecordFunction:
+      Description: "CreateTripRecord Lambda Function ARN"
+      Value: !GetAtt CreateTripRecordFunction.Arn
+      
+#    GetStudyRecordsByPeriodFunction:
+#      Description: "GetStudyRecordsByPeriod Lambda Function ARN"
+#      Value: !GetAtt GetStudyRecordsByPeriodFunction.Arn
+#
+#    GetStudyRecordsByTagFunction:
+#      Description: "GetStudyRecordsByTag Lambda Function ARN"
+#      Value: !GetAtt GetStudyRecordsByTagFunction.Arn
+#
+#    GetStudyRecordsByIsConsumedFunction:
+#      Description: "GetStudyRecordsByIsConsumed Lambda Function ARN"
+#      Value: !GetAtt GetStudyRecordsByIsConsumedFunction.Arn
+     
