@@ -51,24 +51,24 @@ Resources:
               - method.request.querystring.start
               - method.request.querystring.end
 
-#  GetStudyRecordsByTagFunction:
-#    Type: AWS::Serverless::Function
-#    Properties:
-#     CodeUri: target/study-datalake-1.0.0-SNAPSHOT-jar-with-dependencies.jar
-#     Handler: br.com.iwe.handler.GetStudyRecordsByTag::handleRequest
-#     Runtime: java8
-#     Policies:
-#       - DynamoDBCrudPolicy:
-#           TableName: !Ref StudyTable
-#     Events:
-#       GetStudyRecordsByTag:
-#         Type: Api
-#         Properties:
-#           Path: /study/{topic}/findByTag
-#           Method: get
+  GetTripRecordsByCountryFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+     CodeUri: target/aws-servless-cloud-native-java-restful-api-1.0.0-SNAPSHOT-jar-with-dependencies.jar
+     Handler: br.com.fiap.handler.GetTripRecordsByCountry::handleRequest
+     Runtime: java8
+     Policies:
+       - DynamoDBCrudPolicy:
+           TableName: !Ref TripTable
+     Events:
+       GetStudyRecordsByTag:
+         Type: Api
+         Properties:
+           Path: /trips/{country}
+           Method: get
 #           RequestParameters:
-#              - method.request.querystring.tag
-#
+#              - method.request.querystring.country
+
 #  GetStudyRecordsByIsConsumedFunction:
 #    Type: AWS::Serverless::Function
 #    Properties:
@@ -126,10 +126,10 @@ Outputs:
       Description: "GetTripRecordsByPeriod Lambda Function ARN"
       Value: !GetAtt GetTripRecordsByPeriodFunction.Arn
 
-#    GetStudyRecordsByTagFunction:
-#      Description: "GetStudyRecordsByTag Lambda Function ARN"
-#      Value: !GetAtt GetStudyRecordsByTagFunction.Arn
-#
+    GetTripRecordsByCountryFunction:
+      Description: "GetTripRecordsByCountry Lambda Function ARN"
+      Value: !GetAtt GetTripRecordsByCountryFunction.Arn
+
 #    GetStudyRecordsByIsConsumedFunction:
 #      Description: "GetStudyRecordsByIsConsumed Lambda Function ARN"
 #      Value: !GetAtt GetStudyRecordsByIsConsumedFunction.Arn

@@ -22,8 +22,10 @@ public class GetTripRecordsByPeriod implements RequestHandler<HandlerRequest, Ha
 		context.getLogger().log("Searching for registered trip between " + starts + " and " + ends);
 
 		final List<Trip> trips = this.repository.findByPeriod(starts, ends);
-		
+
+		//Todo - nunca deveria retornar nullo, verificar se é verdade.
 		if(trips == null || trips.isEmpty()) {
+			//Todo - testar para responde um 200 caso a lista esteja vazia.
 			return HandlerResponse.builder().setStatusCode(404).build();
 		}
 		
