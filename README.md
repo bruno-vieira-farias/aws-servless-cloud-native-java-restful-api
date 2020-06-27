@@ -77,7 +77,7 @@ Next, the following command will create a Cloudformation Stack and deploy your S
 ```bash
 sam deploy \
     --template-file packaged.yaml \
-    --stack-name study-datalake \
+    --stack-name aws-servless-cloud-native-java-restiful-api\
     --capabilities CAPABILITY_IAM
 ```
 

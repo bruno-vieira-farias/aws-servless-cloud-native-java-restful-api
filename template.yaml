@@ -80,8 +80,6 @@ Resources:
           AttributeType: S
         - AttributeName: city
           AttributeType: S
-        - AttributeName: reason
-          AttributeType: S
       KeySchema:
         - AttributeName: country
           KeyType: HASH

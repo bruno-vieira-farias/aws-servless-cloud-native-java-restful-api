@@ -18,7 +18,7 @@ Resources:
   CreateTripRecordFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://fiap-aws-servless-bruno-335369/706195ad05c27538b4a88f591ea36364
+      CodeUri: s3://fiap-aws-servless-bruno-335369/d388e9cb70d11f8311b8ab4c614265d4
       Handler: br.com.fiap.handler.CreateTripRecord::handleRequest
       Runtime: java8
       Policies:
@@ -34,7 +34,7 @@ Resources:
   GetTripRecordsByPeriodFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://fiap-aws-servless-bruno-335369/706195ad05c27538b4a88f591ea36364
+      CodeUri: s3://fiap-aws-servless-bruno-335369/d388e9cb70d11f8311b8ab4c614265d4
       Handler: br.com.fiap.handler.GetTripRecordsByPeriod::handleRequest
       Runtime: java8
       Policies:
@@ -53,7 +53,7 @@ Resources:
   GetTripRecordsByCountryFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://fiap-aws-servless-bruno-335369/706195ad05c27538b4a88f591ea36364
+      CodeUri: s3://fiap-aws-servless-bruno-335369/d388e9cb70d11f8311b8ab4c614265d4
       Handler: br.com.fiap.handler.GetTripRecordsByCountry::handleRequest
       Runtime: java8
       Policies:
@@ -67,7 +67,7 @@ Resources:
             Path: /trips/{country}
             Method: get
             RequestParameters:
-              - method.request.querystring.city
+            - method.request.querystring.city
   TripTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -78,8 +78,6 @@ Resources:
       - AttributeName: date
         AttributeType: S
       - AttributeName: city
-        AttributeType: S
-      - AttributeName: reason
         AttributeType: S
       KeySchema:
       - AttributeName: country
