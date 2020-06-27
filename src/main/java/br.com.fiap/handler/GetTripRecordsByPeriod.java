@@ -23,9 +23,7 @@ public class GetTripRecordsByPeriod implements RequestHandler<HandlerRequest, Ha
 
 		final List<Trip> trips = this.repository.findByPeriod(starts, ends);
 
-		//Todo - nunca deveria retornar nullo, verificar se é verdade.
-		if(trips == null || trips.isEmpty()) {
-			//Todo - testar para responde um 200 caso a lista esteja vazia.
+		if(trips == null ) {
 			return HandlerResponse.builder().setStatusCode(404).build();
 		}
 		

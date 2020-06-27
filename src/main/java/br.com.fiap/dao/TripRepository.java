@@ -20,14 +20,14 @@ public class TripRepository {
 
     public List<Trip> findByPeriod(final String startDate, final String endDate) {
         final Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
-        eav.put(":val1", new AttributeValue().withS(startDate));
-        eav.put(":val2", new AttributeValue().withS(endDate));
+        eav.put(":startDate", new AttributeValue().withS(startDate));
+        eav.put(":endDate", new AttributeValue().withS(endDate));
 
         final Map<String, String> expression = new HashMap<>();
         expression.put("#date", "date");
 
         final DynamoDBScanExpression queryExpression = new DynamoDBScanExpression()
-                .withFilterExpression("#date between :val1 and :val2")
+                .withFilterExpression("#date between :startDate and :endDate")
                 .withExpressionAttributeValues(eav)
                 .withExpressionAttributeNames(expression);
         final List<Trip> result = mapper.scan(Trip.class, queryExpression);
