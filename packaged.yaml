@@ -64,28 +64,10 @@ Resources:
         GetTripRecordsByCountry:
           Type: Api
           Properties:
-            Path: /trips
+            Path: /trips/{country}
             Method: get
             RequestParameters:
-            - method.request.querystring.country
-  GetTripRecordsByCityFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: s3://fiap-aws-servless-bruno-335369/706195ad05c27538b4a88f591ea36364
-      Handler: br.com.fiap.handler.GetTripRecordsByCity::handleRequest
-      Runtime: java8
-      Policies:
-      - DynamoDBCrudPolicy:
-          TableName:
-            Ref: TripTable
-      Events:
-        GetTripRecordsByCity:
-          Type: Api
-          Properties:
-            Path: /trips/{country}/
-            Method: get
-            RequestParameters:
-            - method.request.querystring.city
+              - method.request.querystring.city
   TripTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -128,14 +110,8 @@ Outputs:
       - GetTripRecordsByPeriodFunction
       - Arn
   GetTripRecordsByCountryFunction:
-    Description: GetTripRecordsByTag Lambda Function ARN
+    Description: GetTripRecordsByCountry Lambda Function ARN
     Value:
       Fn::GetAtt:
-      - GetTripRecordsByTagFunction
-      - Arn
-  GetTripRecordsByCityFunction:
-    Description: GetTripRecordsByCity Lambda Function ARN
-    Value:
-      Fn::GetAtt:
-      - GetTripRecordsByCityFunction
+      - GetTripRecordsByCountryFunction
       - Arn

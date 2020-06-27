@@ -10,9 +10,5 @@
 	"GetTripRecordsByCountryFunction": {
 		"ENDPOINT_OVERRIDE": "http://docker.for.mac.localhost:8000",
 		"TABLE_NAME": "trip"
-	},
-	"GetTripRecordsByCityFunction": {
-		"ENDPOINT_OVERRIDE": "http://docker.for.mac.localhost:8000",
-		"TABLE_NAME": "trip"
 	}
 }
