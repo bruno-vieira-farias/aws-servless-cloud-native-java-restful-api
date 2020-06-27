@@ -3,15 +3,15 @@
 		"ENDPOINT_OVERRIDE": "http://docker.for.mac.localhost:8000",
 		"TABLE_NAME": "trip"
 	},
-	"GetSTripRecordsByPeriodFunction": {
+	"GetTripRecordsByPeriodFunction": {
 		"ENDPOINT_OVERRIDE": "http://docker.for.mac.localhost:8000",
 		"TABLE_NAME": "trip"
 	},
-	"GetTripRecordsByTagFunction": {
+	"GetTripRecordsByCountryFunction": {
 		"ENDPOINT_OVERRIDE": "http://docker.for.mac.localhost:8000",
 		"TABLE_NAME": "trip"
 	},
-	"GetTripRecordsByIsConsumedFunction": {
+	"GetTripRecordsByCityFunction": {
 		"ENDPOINT_OVERRIDE": "http://docker.for.mac.localhost:8000",
 		"TABLE_NAME": "trip"
 	}

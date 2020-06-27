@@ -42,7 +42,7 @@ Resources:
           TableName:
             Ref: TripTable
       Events:
-        GetStudyRecordsByPeriod:
+        GetTripRecordsByPeriod:
           Type: Api
           Properties:
             Path: /trips
@@ -61,32 +61,31 @@ Resources:
           TableName:
             Ref: TripTable
       Events:
-        GetStudyRecordsByTag:
+        GetTripRecordsByCountry:
           Type: Api
           Properties:
             Path: /trips
             Method: get
             RequestParameters:
             - method.request.querystring.country
-  # ----
-#  GetStudyRecordsByIsConsumedFunction:
-#    Type: AWS::Serverless::Function
-#    Properties:
-#      CodeUri: s3://fiap-aws-servless-bruno-335369/706195ad05c27538b4a88f591ea36364
-#      Handler: br.com.iwe.handler.GetStudyRecordsByIsConsumed::handleRequest
-#      Runtime: java8
-#      Policies:
-#      - DynamoDBCrudPolicy:
-#          TableName:
-#            Ref: StudyTable
-#      Events:
-#        GetStudyRecordsByIsConsumed:
-#          Type: Api
-#          Properties:
-#            Path: /study/{topic}/findByIsConsumed
-#            Method: get
-#            RequestParameters:
-#            - method.request.querystring.isconsumed
+  GetTripRecordsByCityFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://fiap-aws-servless-bruno-335369/706195ad05c27538b4a88f591ea36364
+      Handler: br.com.fiap.handler.GetTripRecordsByCity::handleRequest
+      Runtime: java8
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: TripTable
+      Events:
+        GetTripRecordsByCity:
+          Type: Api
+          Properties:
+            Path: /trips/{country}/
+            Method: get
+            RequestParameters:
+            - method.request.querystring.city
   TripTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -134,9 +133,9 @@ Outputs:
       Fn::GetAtt:
       - GetTripRecordsByTagFunction
       - Arn
-#  GetStudyRecordsByIsConsumedFunction:
-#    Description: GetStudyRecordsByIsConsumed Lambda Function ARN
-#    Value:
-#      Fn::GetAtt:
-#      - GetStudyRecordsByIsConsumedFunction
-#      - Arn
+  GetTripRecordsByCityFunction:
+    Description: GetTripRecordsByCity Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - GetTripRecordsByCityFunction
+      - Arn

@@ -42,7 +42,7 @@ Resources:
        - DynamoDBCrudPolicy:
            TableName: !Ref TripTable
      Events:
-       GetStudyRecordsByPeriod:
+       GetTripRecordsByPeriod:
          Type: Api
          Properties:
            Path: /trips
@@ -61,31 +61,29 @@ Resources:
        - DynamoDBCrudPolicy:
            TableName: !Ref TripTable
      Events:
-       GetStudyRecordsByTag:
+       GetTripRecordsByCountry:
          Type: Api
          Properties:
            Path: /trips/{country}
            Method: get
-#           RequestParameters:
-#              - method.request.querystring.country
 
-#  GetStudyRecordsByIsConsumedFunction:
-#    Type: AWS::Serverless::Function
-#    Properties:
-#     CodeUri: target/study-datalake-1.0.0-SNAPSHOT-jar-with-dependencies.jar
-#     Handler: br.com.iwe.handler.GetStudyRecordsByIsConsumed::handleRequest
-#     Runtime: java8
-#     Policies:
-#       - DynamoDBCrudPolicy:
-#           TableName: !Ref StudyTable
-#     Events:
-#       GetStudyRecordsByIsConsumed:
-#         Type: Api
-#         Properties:
-#           Path: /study/{topic}/findByIsConsumed
-#           Method: get
-#           RequestParameters:
-#              - method.request.querystring.isconsumed
+  GetTripRecordsByCityFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+     CodeUri: target/aws-servless-cloud-native-java-restful-api-1.0.0-SNAPSHOT-jar-with-dependencies.jar
+     Handler: br.com.fiap.handler.GetTripRecordsByCity::handleRequest
+     Runtime: java8
+     Policies:
+       - DynamoDBCrudPolicy:
+           TableName: !Ref TripTable
+     Events:
+       GetCityRecordsByCity:
+         Type: Api
+         Properties:
+           Path: /trips/x/{country}/
+           Method: get
+           RequestParameters:
+              - method.request.querystring.city
               
   TripTable:
     Type: AWS::DynamoDB::Table
@@ -130,7 +128,7 @@ Outputs:
       Description: "GetTripRecordsByCountry Lambda Function ARN"
       Value: !GetAtt GetTripRecordsByCountryFunction.Arn
 
-#    GetStudyRecordsByIsConsumedFunction:
-#      Description: "GetStudyRecordsByIsConsumed Lambda Function ARN"
-#      Value: !GetAtt GetStudyRecordsByIsConsumedFunction.Arn
+    GetTripRecordsByCityFunction:
+      Description: "GetTripRecordsByCity Lambda Function ARN"
+      Value: !GetAtt GetTripRecordsByCityFunction.Arn
      

@@ -11,7 +11,7 @@
 		"ENDPOINT_OVERRIDE": "http://192.168.0.108:8000",
 		"TABLE_NAME": "trip"
 	},
-	"GetTripRecordsByIsConsumedFunction": {
+	"GetTripRecordsByCityFunction": {
 		"ENDPOINT_OVERRIDE": "http://192.168.0.108:8000",
 		"TABLE_NAME": "trip"
 	}

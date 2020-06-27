@@ -7,11 +7,11 @@
 		"ENDPOINT_OVERRIDE": "http://docker.for.windows.localhost:8000",
 		"TABLE_NAME": "trip"
 	},
-	"GetTripRecordsByTagFunction": {
+	"GetTripRecordsByCountryFunction": {
 		"ENDPOINT_OVERRIDE": "http://docker.for.windows.localhost:8000",
 		"TABLE_NAME": "trip"
 	},
-	"GetTripRecordsByIsConsumedFunction": {
+	"GetTripRecordsByCityFunction": {
 		"ENDPOINT_OVERRIDE": "http://docker.for.windows.localhost:8000",
 		"TABLE_NAME": "trip"
 	}
