@@ -1,9 +1,7 @@
 ## AWS SAM Application for Managing Study Data Lake
 
-This is a sample application to demonstrate how to build an application on AWS Serverless Envinronment using the
-AWS SAM, Amazon API Gateway, AWS Lambda and Amazon DynamoDB.
-It also uses the DynamoDBMapper ORM structure to map Study items in a DynamoDB table to a RESTful API for managing Studies.
-
+This is a AWS Serverless application using the AWS SAM, Amazon API Gateway, AWS Lambda and Amazon DynamoDB.
+It also uses the DynamoDBMapper ORM structure to map Trip items in a DynamoDB table to a RESTful API for managing Trips.
 
 ## Requirements
 
@@ -40,8 +38,8 @@ If the table already exist, you can delete: `aws dynamodb delete-table --table-n
  OBS:  If you already have the container locally (in your case the java8), then you can use --skip-pull-image to remove the download
 
 If the previous command ran successfully you should now be able to hit the following local endpoint to
-invoke the functions rooted at `http://localhost:3000/study/{topic}?starts=2020-01-02&ends=2020-02-02`.
-It shoud return 404. Now you can explore all endpoints, use the src/test/resources/Study DataLake.postman_collection.json to import a API Rest Collection into Postman.
+invoke the functions rooted at `http://localhost:3000/trips/{contry}?starts=2020-01-02&ends=2020-02-02`.
+It shoud return 404. Now you can explore all endpoints, use the src/test/resources/Trips.postman_collection.json to import a API Rest Collection into Postman.
 
 **SAM CLI** is used to emulate both Lambda and API Gateway locally and uses our `template.yaml` to
 understand how to bootstrap this environment (runtime, where the source code is, etc.) - The
@@ -112,10 +110,3 @@ sam deploy \
 aws cloudformation describe-stacks \
     --stack-name sam-orderHandler --query 'Stacks[].Outputs'
 ```
-
-## Bringing to the next level
-
-Next, you can use the following resources to know more about beyond hello world samples and how others
-structure their Serverless applications:
-
-* [AWS Serverless Application Repository](https://aws.amazon.com/serverless/serverlessrepo/)

@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.Map;
 
 public class HandlerResponse {
-
 	private final int statusCode;
 	private final String body;
 	private final Map<String, String> headers;
@@ -44,7 +43,6 @@ public class HandlerResponse {
 	}
 
 	public static class Builder {
-
 		private static final ObjectMapper objectMapper = new ObjectMapper();
 
 		private int statusCode = 200;

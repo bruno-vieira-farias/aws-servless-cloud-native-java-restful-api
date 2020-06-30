@@ -62,4 +62,5 @@ public class Trip {
     public String toString() {
         return String.format("Contry=%s, Data=%s, City=%s, Reason=%s.", country, date, city, reason);
     }
+
 }

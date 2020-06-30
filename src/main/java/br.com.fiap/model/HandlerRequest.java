@@ -3,23 +3,21 @@ package br.com.fiap.model;
 import java.util.Map;
 
 public class HandlerRequest {
-
 	private String body;
 	private String path;
 	private Map<String, String> pathParameters;
 	private Map<String, String> queryStringParameters;
 
-	public HandlerRequest(String body, String path, Map<String, String> pathParameters,
-                          Map<String, String> queryStringParameters) {
+	public HandlerRequest() {
+		super();
+	}
+
+	public HandlerRequest(String body, String path, Map<String, String> pathParameters,Map<String, String> queryStringParameters){
 		super();
 		this.body = body;
 		this.path = path;
 		this.pathParameters = pathParameters;
 		this.queryStringParameters = queryStringParameters;
-	}
-
-	public HandlerRequest() {
-		super();
 	}
 
 	public String getBody() {

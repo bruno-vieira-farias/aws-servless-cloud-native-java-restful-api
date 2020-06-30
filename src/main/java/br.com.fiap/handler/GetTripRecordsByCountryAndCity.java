@@ -9,8 +9,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import java.util.List;
 
-public class GetTripRecordsByCountry implements RequestHandler<HandlerRequest, HandlerResponse> {
-
+public class GetTripRecordsByCountryAndCity implements RequestHandler<HandlerRequest, HandlerResponse> {
     private final TripRepository repository = new TripRepository();
 
     @Override
@@ -18,28 +17,23 @@ public class GetTripRecordsByCountry implements RequestHandler<HandlerRequest, H
         final String country = request.getPathParameters().get("country");
         final String city = getCity(request);
 
-        context.getLogger().log("Searching for registered trips for ->" + country);
-        final List<Trip> trips = getTrips(country, city);
+        context.getLogger().log("Searching for registered trips for " + country);
+        final List<Trip> trips = city != null ?
+                this.repository.findByCity(country, city):
+                this.repository.findByCountry(country);
 
-        if (trips == null || trips.isEmpty()) {
+        if (trips.isEmpty()) {
             return HandlerResponse.builder().setStatusCode(404).build();
         }
 
         return HandlerResponse.builder().setStatusCode(200).setObjectBody(trips).build();
     }
 
-    private List<Trip> getTrips(String country, String city) {
-        if (city == null) {
-            return this.repository.findByCountry(country);
-        }
-
-        return this.repository.findByCity(country, city);
-    }
-
     private String getCity(HandlerRequest request) {
         try {
             return request.getQueryStringParameters().get("city");
-        } catch (NullPointerException e) {
+        }
+        catch (NullPointerException e) {
             return null;
         }
     }

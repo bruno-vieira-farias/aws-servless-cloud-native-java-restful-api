@@ -1,0 +1,110 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Trips",
+		"_postman_id": "649e6019-d85e-890b-3274-27969fb43c5a",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Trip",
+			"request": {
+				"url": "http://localhost:3000/trips",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"country\": \"Brasil\",\n    \"date\": \"2020-06-20\",\n    \"city\": \"Salvador\",\n    \"reason\": \"Ferias de Verão\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "findByPeriod",
+			"request": {
+				"url": {
+					"raw": "http://localhost:3000/trips?start=2020-06-01&end=2020-06-30",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"trips"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "2020-06-01",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "end",
+							"value": "2020-06-30",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "findByCountry",
+			"request": {
+				"url": "http://localhost:3000/trips/Brasil",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "findByCity",
+			"request": {
+				"url": {
+					"raw": "http://localhost:3000/trips/Brasil/?city=Salvador",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"trips",
+						"Brasil",
+						""
+					],
+					"query": [
+						{
+							"key": "city",
+							"value": "Salvador",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

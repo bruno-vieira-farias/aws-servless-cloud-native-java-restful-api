@@ -29,7 +29,7 @@ Resources:
        CreateTripRecord:
          Type: Api
          Properties:
-           Path: /trip
+           Path: /trips
            Method: post
            
   GetTripRecordsByPeriodFunction:
@@ -51,17 +51,17 @@ Resources:
               - method.request.querystring.start
               - method.request.querystring.end
 
-  GetTripRecordsByCountryFunction:
+  GetTripRecordsByCountryAndCityFunction:
     Type: AWS::Serverless::Function
     Properties:
      CodeUri: target/aws-servless-cloud-native-java-restful-api-1.0.0-SNAPSHOT-jar-with-dependencies.jar
-     Handler: br.com.fiap.handler.GetTripRecordsByCountry::handleRequest
+     Handler: br.com.fiap.handler.GetTripRecordsByCountryAndCity::handleRequest
      Runtime: java8
      Policies:
        - DynamoDBCrudPolicy:
            TableName: !Ref TripTable
      Events:
-       GetTripRecordsByCountry:
+       GetTripRecordsByCountryAndCity:
          Type: Api
          Properties:
            Path: /trips/{country}
@@ -106,6 +106,6 @@ Outputs:
       Description: "GetTripRecordsByPeriod Lambda Function ARN"
       Value: !GetAtt GetTripRecordsByPeriodFunction.Arn
 
-    GetTripRecordsByCountryFunction:
-      Description: "GetTripRecordsByCountry Lambda Function ARN"
-      Value: !GetAtt GetTripRecordsByCountryFunction.Arn
+    GetTripRecordsByCountryAndCityFunction:
+      Description: "GetTripRecordsByCountryAndCity Lambda Function ARN"
+      Value: !GetAtt GetTripRecordsByCountryAndCityFunction.Arn

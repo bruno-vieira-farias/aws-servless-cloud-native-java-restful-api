@@ -29,7 +29,7 @@ Resources:
         CreateTripRecord:
           Type: Api
           Properties:
-            Path: /trip
+            Path: /trips
             Method: post
   GetTripRecordsByPeriodFunction:
     Type: AWS::Serverless::Function
@@ -50,18 +50,18 @@ Resources:
             RequestParameters:
             - method.request.querystring.start
             - method.request.querystring.end
-  GetTripRecordsByCountryFunction:
+  GetTripRecordsByCountryAndCityFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: s3://fiap-aws-servless-bruno-335369/d388e9cb70d11f8311b8ab4c614265d4
-      Handler: br.com.fiap.handler.GetTripRecordsByCountry::handleRequest
+      Handler: br.com.fiap.handler.GetTripRecordsByCountryAndCity::handleRequest
       Runtime: java8
       Policies:
       - DynamoDBCrudPolicy:
           TableName:
             Ref: TripTable
       Events:
-        GetTripRecordsByCountry:
+        GetTripRecordsByCountryAndCity:
           Type: Api
           Properties:
             Path: /trips/{country}
@@ -107,9 +107,9 @@ Outputs:
       Fn::GetAtt:
       - GetTripRecordsByPeriodFunction
       - Arn
-  GetTripRecordsByCountryFunction:
-    Description: GetTripRecordsByCountry Lambda Function ARN
+  GetTripRecordsByCountryAndCityFunction:
+    Description: GetTripRecordsByCountryAndCity Lambda Function ARN
     Value:
       Fn::GetAtt:
-      - GetTripRecordsByCountryFunction
+      - GetTripRecordsByCountryAndCityFunction
       - Arn

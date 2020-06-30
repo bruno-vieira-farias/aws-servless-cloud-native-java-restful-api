@@ -11,7 +11,6 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import java.util.List;
 
 public class GetTripRecordsByPeriod implements RequestHandler<HandlerRequest, HandlerResponse> {
-
 	private final TripRepository repository = new TripRepository();
 	
 	@Override
@@ -23,10 +22,6 @@ public class GetTripRecordsByPeriod implements RequestHandler<HandlerRequest, Ha
 
 		final List<Trip> trips = this.repository.findByPeriod(starts, ends);
 
-		if(trips == null ) {
-			return HandlerResponse.builder().setStatusCode(404).build();
-		}
-		
 		return HandlerResponse.builder().setStatusCode(200).setObjectBody(trips).build();
 	}
 }
